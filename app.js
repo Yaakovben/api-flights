@@ -100,7 +100,7 @@ const allClients = () => __awaiter(void 0, void 0, void 0, function* () {
             deleteClient.addEventListener("click", () => removeClient(dataClients[i].id, dataFlights[i].id));
             const editClient = document.createElement("button");
             editClient.textContent = "✏️";
-            // editClient.addEventListener("click", () => editClint(dataClients[i], dataFlights[i]))    
+            editClient.addEventListener("click", () => editClint(dataClients[i]));
             newDiv.appendChild(line);
             newDiv.appendChild(deleteClient);
             newDiv.appendChild(editClient);
@@ -129,3 +129,6 @@ const removeClient = (idClient, idFlight) => __awaiter(void 0, void 0, void 0, f
     }
 });
 refresh.addEventListener("click", allClients);
+const editClint = (idClients) => {
+    const newEdit = prompt("Enter new title:", idClients.name);
+};

@@ -102,7 +102,7 @@ add.addEventListener("click",async():Promise<void> =>{
             deleteClient.addEventListener("click", () => removeClient(dataClients[i].id, dataFlights[i].id))
             const editClient:HTMLElement = document.createElement("button")
             editClient.textContent = "✏️" 
-            // editClient.addEventListener("click", () => editClint(dataClients[i], dataFlights[i]))    
+            editClient.addEventListener("click", () => editClint(dataClients[i]))    
             newDiv.appendChild(line)
             newDiv.appendChild(deleteClient)
             newDiv.appendChild(editClient)
@@ -139,7 +139,14 @@ add.addEventListener("click",async():Promise<void> =>{
  refresh.addEventListener("click",allClients)
 
 
- 
+
+
+
+ const editClint = (idClients:Client): void => {
+    const newEdit = prompt("Enter new title:", idClients.name)
+    
+    }
+   
 
 
 
