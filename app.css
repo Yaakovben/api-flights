@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(246, 247, 247);
+}
+
+.topPage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: white;
+    width: 40%; 
+    margin-left: 30%;
+    height: 20vh;
+}
+
+
+.upTop, .downPage{
+    display: flex;
+    justify-content: space-between;
+}
+
+.radioButton, .inputName,select{
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+
+.Select {
+    width: 350px;
+    height: 25px;       
+}
+
+
+.add{
+    height: 40px;
+    width: 80px;
+}
+.represh{
+
+}
+
+
+.clients{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: white;
+    width: 40%; 
+    margin-left: 30%;  
+}
+
+.newDiv{
+    display: flex;
+    background-color: darkkhaki;
+    justify-content: space-around;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
