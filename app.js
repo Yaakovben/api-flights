@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const BASE_URL = "https://66e98a6387e417609449dfc5.mockapi.io/api/";
+const BASE_URL = "https://66eaf30a55ad32cda47b1270.mockapi.io/api/";
 const selectFlights = document.querySelector('.Select');
 const add = document.querySelector('.add');
 const inputName = document.querySelector('.inputName');
@@ -36,7 +36,7 @@ const optionFlights = (flight) => {
     selectFlights.appendChild(opt);
     console.log(flight);
 };
-// קריאה לפונקצייה
+// קריאה לפונקצייה שציג תסלקט
 getFlights();
 // פונקציית הכנסה לAPI
 add.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
@@ -63,7 +63,7 @@ add.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* 
         console.log(err);
     }
 }));
-// פונקציית הדפסת הלקוח על המסך
+// פונקציית הדפסת הלקוח שנוסף על המסך
 const displayCliants = (client) => __awaiter(void 0, void 0, void 0, function* () {
     const flights = yield fetch(BASE_URL + `flights/${client.flight_id}`);
     const data = yield flights.json();
@@ -80,9 +80,10 @@ const displayCliants = (client) => __awaiter(void 0, void 0, void 0, function* (
     newDiv.appendChild(editClient);
     clients.appendChild(newDiv);
 });
-// 
+// פונקציית הדפסת כל הקליינטים על המסך
 const allClients = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        clients.innerHTML = "";
         const resFlights = yield fetch(BASE_URL + "flights");
         const dataFlights = yield resFlights.json();
         const resClients = yield fetch(BASE_URL + `pasangers?agent=2124`);
@@ -95,8 +96,10 @@ const allClients = () => __awaiter(void 0, void 0, void 0, function* () {
             line.textContent = `name: ${dataClients[i].name}, ${dataFlights[i].from} ==> ${dataFlights[i].to}`;
             const deleteClient = document.createElement("button");
             deleteClient.textContent = "🗑️";
+            deleteClient.addEventListener("click", () => removeClient(dataClients[i].id, dataFlights[i].id));
             const editClient = document.createElement("button");
             editClient.textContent = "✏️";
+            // editClient.addEventListener("click", () => editClint(dataClients[i], dataFlights[i]))    
             newDiv.appendChild(line);
             newDiv.appendChild(deleteClient);
             newDiv.appendChild(editClient);
@@ -107,4 +110,20 @@ const allClients = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(err);
     }
 });
+// קריאה לפונקצייה שתדפיס את כל הרקליינטים על המסך
 allClients();
+// פונקצייה שמוחקת קליינטים
+const removeClient = (idClient, idFlight) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const Client = yield fetch(BASE_URL + `pasangers/${idClient}`, {
+            method: "DELETE"
+        });
+        const Flight = yield fetch(BASE_URL + `flights/${idFlight}`, {
+            method: "DELETE"
+        });
+        allClients();
+    }
+    catch (err) {
+        console.error(err);
+    }
+});

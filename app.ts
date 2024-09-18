@@ -1,4 +1,4 @@
-const  BASE_URL:string = "https://66e98a6387e417609449dfc5.mockapi.io/api/"
+const  BASE_URL:string = "https://66eaf30a55ad32cda47b1270.mockapi.io/api/"
 const selectFlights: HTMLSelectElement = document.querySelector('.Select')!
 const add: HTMLSelectElement = document.querySelector('.add')!
 const inputName: HTMLSelectElement = document.querySelector('.inputName')!
@@ -15,7 +15,6 @@ const clients: HTMLSelectElement = document.querySelector('.clients')!
         for(let flight of flights){
             // קריאה לפונקצייה שיוצרת סלקט
             optionFlights(flight)
-
         }
     }catch(err){
         console.log(err); 
@@ -29,11 +28,10 @@ const clients: HTMLSelectElement = document.querySelector('.clients')!
     opt.value = flight.id
     opt.textContent = `${flight.from} => ${flight.to} (${flight.date})`
     selectFlights.appendChild(opt)
-    console.log(flight);
-    
+    console.log(flight);   
  }
 
- // קריאה לפונקצייה
+ // קריאה לפונקצייה שציג תסלקט
  getFlights()
 
 
@@ -56,20 +54,15 @@ add.addEventListener("click",async():Promise<void> =>{
         })
         const client = await res.json()
         console.log(client);
-
             // קריאה לפונקצייה שמדפיסה את הלקוחות על המסך
             displayCliants(client)
-        
-
-
     }catch(err){
-        console.log(err);
-        
+        console.log(err);        
     }
 })
 
 
-// פונקציית הדפסת הלקוח על המסך
+// פונקציית הדפסת הלקוח שנוסף על המסך
  const displayCliants =async (client:Client):Promise <void> =>{
     const flights = await fetch(BASE_URL+`flights/${client.flight_id}`)
     const data:Flights =await flights.json()
@@ -81,7 +74,6 @@ add.addEventListener("click",async():Promise<void> =>{
     deleteClient.textContent = "🗑️"
     const editClient:HTMLElement = document.createElement("button")
     editClient.textContent = "✏️"
-
     newDiv.appendChild(line)
     newDiv.appendChild(deleteClient)
     newDiv.appendChild(editClient)
@@ -90,9 +82,10 @@ add.addEventListener("click",async():Promise<void> =>{
 
 
 
- // 
+ // פונקציית הדפסת כל הקליינטים על המסך
  const allClients = async():Promise<void> =>{
     try{
+        clients.innerHTML = ""
         const resFlights:Response = await fetch(BASE_URL+"flights")
         const dataFlights:Flights[] = await resFlights.json()
         const resClients:Response = await fetch(BASE_URL+`pasangers?agent=2124`)
@@ -105,28 +98,45 @@ add.addEventListener("click",async():Promise<void> =>{
             line.textContent = `name: ${dataClients[i].name}, ${dataFlights[i].from} ==> ${dataFlights[i].to}`
             const deleteClient:HTMLElement = document.createElement("button")
             deleteClient.textContent = "🗑️"
+            deleteClient.addEventListener("click", () => removeClient(dataClients[i].id, dataFlights[i].id))
             const editClient:HTMLElement = document.createElement("button")
-            editClient.textContent = "✏️"     
+            editClient.textContent = "✏️" 
+            // editClient.addEventListener("click", () => editClint(dataClients[i], dataFlights[i]))    
             newDiv.appendChild(line)
             newDiv.appendChild(deleteClient)
             newDiv.appendChild(editClient)
             clients.appendChild(newDiv)
         }
-
     }catch(err){
-        console.log(err);
-        
+        console.log(err);       
     }
+ }
+
+
+// קריאה לפונקצייה שתדפיס את כל הרקליינטים על המסך
+ allClients()
+
+// פונקצייה שמוחקת קליינטים
+ const removeClient  = async(idClient:string, idFlight:string):Promise<void> =>{
+    try {
+        const Client = await fetch(BASE_URL+`pasangers/${idClient}`,{
+            method:"DELETE"
+        }) 
+        const Flight = await fetch(BASE_URL+`flights/${idFlight}`, {
+            method:"DELETE"
+        })
+
+        allClients()
+       
+    } catch (err) {
+        console.error(err)
+    }
+
 
  }
 
 
-
-
-
-
-
- allClients()
+ 
 
 
 
@@ -149,6 +159,7 @@ name: string,
 gender:string
 flight_id: string
 agent: string
+id:string
 
 }
 
