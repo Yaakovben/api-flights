@@ -4,6 +4,7 @@ const add: HTMLSelectElement = document.querySelector('.add')!
 const inputName: HTMLSelectElement = document.querySelector('.inputName')!
 const Select: HTMLSelectElement = document.querySelector('.Select')!
 const clients: HTMLSelectElement = document.querySelector('.clients')!
+const refresh: HTMLSelectElement = document.querySelector('.ref')!
 
 
 
@@ -134,6 +135,8 @@ add.addEventListener("click",async():Promise<void> =>{
 
 
  }
+
+ refresh.addEventListener("click",allClients)
 
 
  

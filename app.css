@@ -6,6 +6,7 @@
 
 body {
     background-color: rgb(246, 247, 247);
+    gap: 5px;
 }
 
 .topPage {
@@ -21,35 +22,28 @@ body {
     height: 20vh;
 }
 
-
-.upTop, .downPage{
+.upTop, .downPage {
     display: flex;
     justify-content: space-between;
 }
 
-.radioButton, .inputName,select{
+.radioButton, .inputName, select {
     border: 1px solid black;
     padding: 5px;
     border-radius: 8px;
 }
-
 
 .Select {
     width: 350px;
     height: 25px;       
 }
 
-
-.add{
+.add {
     height: 40px;
     width: 80px;
 }
-.represh{
 
-}
-
-
-.clients{
+.clients {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -61,7 +55,7 @@ body {
     margin-left: 30%;  
 }
 
-.newDiv{
+.newDiv {
     display: flex;
     background-color: darkkhaki;
     justify-content: space-around;
@@ -70,17 +64,9 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.refresh {
+    height: 30px;
+    width: 100px;
+    margin: 20px auto;
+    display: block; 
+}

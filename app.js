@@ -14,6 +14,7 @@ const add = document.querySelector('.add');
 const inputName = document.querySelector('.inputName');
 const Select = document.querySelector('.Select');
 const clients = document.querySelector('.clients');
+const refresh = document.querySelector('.ref');
 // ריצה על כל הטיסות הקיימות
 const getFlights = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -127,3 +128,4 @@ const removeClient = (idClient, idFlight) => __awaiter(void 0, void 0, void 0, f
         console.error(err);
     }
 });
+refresh.addEventListener("click", allClients);
